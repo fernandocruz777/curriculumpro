@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fernando Carlos Cruz Alvarado - Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Outfit', 'Segoe UI', sans-serif;
+            line-height: 1.65;
+            color: #2a2a2a;
+            background-color: #f2f2f2;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(28px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.92); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Decoración lateral */
+        .side-decor {
+            position: fixed;
+            top: 0; bottom: 0;
+            width: 56px;
+            z-index: 50;
+            pointer-events: none;
+            opacity: 0.5;
+        }
+        .side-decor.left {
+            left: 0;
+            background: linear-gradient(to right, #1a1a1a 0%, #1a1a1a 7px, transparent 7px);
+        }
+        .side-decor.right {
+            right: 0;
+            background: linear-gradient(to left, #1a1a1a 0%, #1a1a1a 7px, transparent 7px);
+        }
+        .side-decor::before, .side-decor::after {
+            content: '';
+            position: absolute;
+            width: 7px;
+            height: 70px;
+            background: #555;
+        }
+        .side-decor::before { top: 18%; }
+        .side-decor::after { bottom: 18%; }
+        .side-decor.left::before, .side-decor.left::after { left: 0; }
+        .side-decor.right::before, .side-decor.right::after { right: 0; }
+
+        /* Nav */
+        nav {
+            background: #1a1a1a;
+            padding: 1rem 3rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 22px rgba(0,0,0,0.3);
+            animation: fadeIn 0.7s ease;
+        }
+        nav .logo {
+            font-family: 'Manrope', 'Segoe UI', sans-serif;
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+        nav .logo:hover { opacity: 0.85; }
+        nav ul { list-style: none; display: flex; gap: 2.2rem; }
+        nav a {
+            color: #b0b0b0;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            padding-bottom: 3px;
+            transition: color 0.3s;
+        }
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 0; height: 1.5px;
+            background: #fff;
+            transition: width 0.3s ease;
+        }
+        nav a:hover { color: #fff; }
+        nav a:hover::after { width: 100%; }
+
+        /* Secciones - más anchas en PC */
+        section {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 5rem 2.5rem;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 2.3rem;
+            animation: fadeInUp 0.7s ease;
+        }
+        .section-title h2 {
+            font-family: 'Manrope', 'Segoe UI', sans-serif;
+            color: #1a1a1a;
+            font-size: 2.15rem;
+            font-weight: 700;
+            position: relative;
+        }
+        .section-title h2::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: #555;
+            margin-top: 9px;
+            border-radius: 2px;
+        }
+        .icon-box {
+            width: 48px;
+            height: 48px;
+            border: 2px solid #444;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .icon-box svg {
+            width: 24px;
+            height: 24px;
+            stroke: #333;
+            fill: none;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* HOME */
+        #home {
+            background: linear-gradient(165deg, #111 0%, #2a2a2a 100%);
+            color: #fff;
+            text-align: center;
+            padding: 8.5rem 2rem 7.5rem;
+            max-width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        #home::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 18% 80%, rgba(255,255,255,0.03) 0%, transparent 42%),
+                radial-gradient(circle at 82% 22%, rgba(255,255,255,0.025) 0%, transparent 42%);
+        }
+        #home h1 {
+            font-family: 'Manrope', 'Segoe UI', sans-serif;
+            font-size: 3.4rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.5rem;
+            animation: fadeInUp 0.8s ease;
+            position: relative;
+        }
+        #home .titulo {
+            font-size: 1.2rem;
+            color: #a8a8a8;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+            letter-spacing: 0.4px;
+            animation: fadeInUp 0.8s ease 0.12s both;
+            position: relative;
+        }
+        #home .propuesta {
+            font-size: 1.12rem;
+            max-width: 640px;
+            margin: 0 auto 2.5rem;
+            color: #c8c8c8;
+            line-height: 1.75;
+            font-weight: 300;
+            animation: fadeInUp 0.8s ease 0.25s both;
+            position: relative;
+        }
+        .btn {
+            display: inline-block;
+            background: #fff;
+            color: #1a1a1a;
+            padding: 0.95rem 2.5rem;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border: 2px solid #fff;
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.8s ease 0.4s both;
+            position: relative;
+        }
+        .btn:hover {
+            background: transparent;
+            color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255,255,255,0.1);
+        }
+
+        /* SOBRE MÍ */
+        #sobre-mi { background: #fff; }
+        .sobre-contenido {
+            display: flex;
+            gap: 3.2rem;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease;
+        }
+        .foto-perfil {
+            width: 230px;
+            height: 230px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #2a2a2a;
+            flex-shrink: 0;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.18);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            animation: scaleIn 0.8s ease;
+        }
+        .foto-perfil:hover {
+            transform: scale(1.04);
+            box-shadow: 0 16px 50px rgba(0,0,0,0.25);
+        }
+        .sobre-texto { flex: 1; min-width: 280px; }
+        .sobre-texto p {
+            margin-bottom: 1.15rem;
+            font-size: 1.06rem;
+            color: #3a3a3a;
+            line-height: 1.7;
+        }
+        .herramientas { margin-top: 1.8rem; }
+        .herramientas strong {
+            display: block;
+            margin-bottom: 0.9rem;
+            color: #1a1a1a;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+        .herramientas span {
+            display: inline-block;
+            background: #f0f0f0;
+            color: #333;
+            padding: 0.42rem 1rem;
+            border-radius: 4px;
+            margin: 0.3rem;
+            font-size: 0.87rem;
+            font-weight: 500;
+            border: 1px solid #e0e0e0;
+            transition: all 0.25s ease;
+        }
+        .herramientas span:hover {
+            background: #1a1a1a;
+            color: #fff;
+            border-color: #1a1a1a;
+            transform: translateY(-2px);
+        }
+
+        /* PROYECTOS */
+        #proyectos { background: #eaeaea; }
+        .proyecto {
+            background: #fff;
+            border-radius: 10px;
+            padding: 2rem 2.3rem;
+            margin-bottom: 1.7rem;
+            box-shadow: 0 3px 16px rgba(0,0,0,0.06);
+            border-left: 4px solid #555;
+            transition: all 0.35s ease;
+            animation: fadeInUp 0.7s ease;
+        }
+        .proyecto:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 14px 36px rgba(0,0,0,0.1);
+            border-left-color: #1a1a1a;
+        }
+        .proyecto-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 1.15rem;
+        }
+        .proyecto-header .mini-icon {
+            width: 38px;
+            height: 38px;
+            border: 1.5px solid #555;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .proyecto-header .mini-icon svg {
+            width: 18px;
+            height: 18px;
+            stroke: #333;
+            fill: none;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .proyecto h3 {
+            font-family: 'Manrope', 'Segoe UI', sans-serif;
+            color: #1a1a1a;
+            font-size: 1.35rem;
+            font-weight: 700;
+        }
+        .proyecto p {
+            margin-bottom: 0.65rem;
+            font-size: 0.98rem;
+            color: #3a3a3a;
+            line-height: 1.65;
+        }
+        .proyecto strong { color: #1a1a1a; }
+
+        .certificado-box {
+            margin-top: 1.4rem;
+            padding-top: 1.3rem;
+            border-top: 1px solid #e0e0e0;
+        }
+        .certificado-box p {
+            font-size: 0.92rem;
+            color: #555;
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+        }
+        .certificado-box img {
+            max-width: 100%;
+            width: 420px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        .certificado-box img:hover {
+            transform: scale(1.02);
+        }
+
+        /* HABILIDADES */
+        #servicios { background: #fff; }
+        .servicios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 0.5rem;
+        }
+        .servicio {
+            background: #f6f6f6;
+            padding: 1.8rem 1.7rem;
+            border-radius: 10px;
+            border-top: 3px solid #555;
+            transition: all 0.35s ease;
+            animation: fadeInUp 0.7s ease;
+        }
+        .servicio:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 14px 30px rgba(0,0,0,0.1);
+            border-top-color: #1a1a1a;
+            background: #fff;
+        }
+        .servicio-icon {
+            width: 40px;
+            height: 40px;
+            border: 1.5px solid #555;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        .servicio-icon svg {
+            width: 20px;
+            height: 20px;
+            stroke: #333;
+            fill: none;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .servicio h3 {
+            font-family: 'Manrope', 'Segoe UI', sans-serif;
+            margin-bottom: 0.65rem;
+            color: #1a1a1a;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+        .servicio p {
+            font-size: 0.94rem;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* CONTACTO */
+        #contacto {
+            background: linear-gradient(165deg, #111 0%, #2a2a2a 100%);
+            color: #fff;
+            text-align: center;
+        }
+        #contacto .section-title { justify-content: center; }
+        #contacto .section-title h2 { color: #fff; }
+        #contacto .section-title h2::after { background: #777; }
+        #contacto .icon-box { border-color: #777; }
+        #contacto .icon-box svg { stroke: #ccc; }
+        #contacto > p {
+            color: #b0b0b0;
+            margin-bottom: 0.3rem;
+            font-weight: 300;
+            animation: fadeIn 0.8s ease;
+        }
+        .contacto-datos {
+            margin: 1.8rem 0 2.5rem;
+            font-size: 1.05rem;
+            color: #c0c0c0;
+            animation: fadeInUp 0.8s ease;
+        }
+        .contacto-datos p { margin-bottom: 0.5rem; }
+        .contacto-datos a {
+            color: #e8e8e8;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .contacto-datos a:hover { color: #fff; text-decoration: underline; }
+
+        .botones-contacto {
+            display: flex;
+            justify-content: center;
+            gap: 1.3rem;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease 0.15s both;
+        }
+        .btn-contacto {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.95rem 2rem;
+            border-radius: 5px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .btn-email {
+            background: #fff;
+            color: #1a1a1a;
+            border-color: #fff;
+        }
+        .btn-email:hover {
+            background: transparent;
+            color: #fff;
+            transform: translateY(-3px);
+        }
+        .btn-whatsapp {
+            background: transparent;
+            color: #fff;
+            border-color: #888;
+        }
+        .btn-whatsapp:hover {
+            background: #fff;
+            color: #1a1a1a;
+            border-color: #fff;
+            transform: translateY(-3px);
+        }
+
+        footer {
+            background: #0d0d0d;
+            color: #666;
+            text-align: center;
+            padding: 1.6rem;
+            font-size: 0.88rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1000px) {
+            .side-decor { display: none; }
+            section { max-width: 100%; padding: 4rem 1.8rem; }
+        }
+        @media (max-width: 700px) {
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem 1.2rem;
+            }
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1.1rem;
+            }
+            #home { padding: 5.5rem 1.5rem 5rem; }
+            #home h1 { font-size: 2.2rem; }
+            .section-title h2 { font-size: 1.75rem; }
+            .sobre-contenido {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .foto-perfil { margin-bottom: 0.8rem; }
+            .botones-contacto { flex-direction: column; align-items: center; }
+            .certificado-box img { width: 100%; }
+        }
+
+        /* Actualización visual: moderna, accesible y adaptable */
+        :root { --accent: #45c4c5; --accent-deep: #246b73; --ink: #17191c; --muted: #667078; }
+        body { background: #f3f5f6; color: #20262b; }
+        nav { background: rgba(20, 23, 27, .94); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(255,255,255,.08); }
+        nav .logo { font-family: 'Manrope', sans-serif; font-size: 1.08rem; letter-spacing: -.4px; }
+        nav a { transition: color .25s ease; }
+        nav a:hover { color: var(--accent); }
+        section { scroll-margin-top: 78px; }
+        .section-title h2 { letter-spacing: -.7px; }
+        .section-title h2::after { background: var(--accent-deep); }
+        .icon-box { border-color: #d5e3e4; background: #f4fbfb; }
+        .icon-box svg { stroke: var(--accent-deep); }
+        #home { min-height: 650px; display: flex; align-items: center; justify-content: center; text-align: left; background: radial-gradient(ellipse at 80% 15%, rgba(69,196,197,.16), transparent 35%), linear-gradient(135deg,#111518 0%,#20282d 65%,#172326 100%); padding: 7rem 2rem 6rem; }
+        .hero-content { width: min(100%, 920px); position: relative; z-index: 2; }
+        .eyebrow { display: inline-flex; align-items: center; gap: 10px; color: #b8e7e7; font-size: .76rem; letter-spacing: 2px; font-weight: 700; margin-bottom: 1.35rem; animation: fadeInUp .7s ease both; }
+        .eyebrow-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 0 5px rgba(69,196,197,.13); }
+        #home h1 { font-size: clamp(2.8rem, 6.5vw, 5.4rem); line-height: 1.03; letter-spacing: -3px; margin-bottom: 1.1rem; }
+        #home h1 span { color: var(--accent); }
+        #home .titulo { color: #e0e7e9; font-size: clamp(1rem, 2vw, 1.25rem); margin-bottom: 1.2rem; }
+        .hero-separator { color: var(--accent); padding: 0 .35rem; }
+        #home .propuesta { margin: 0 0 2rem; max-width: 660px; color: #bfc9cd; font-size: 1.06rem; }
+        .hero-actions { display: flex; flex-wrap: wrap; gap: .85rem; }
+        .btn { display: inline-flex; align-items: center; gap: 14px; border-radius: 8px; background: var(--accent); border-color: var(--accent); color: #102326; padding: .95rem 1.35rem; animation: fadeInUp .8s ease .2s both; }
+        .btn:hover { color: #fff; border-color: var(--accent); box-shadow: 0 10px 32px rgba(69,196,197,.16); }
+        .btn-ghost { background: transparent; color: #f3f7f8; border-color: #59666b; }
+        .btn-ghost:hover { background: rgba(255,255,255,.07); color: #fff; }
+        .hero-proof { display: flex; flex-wrap: wrap; gap: 0; margin-top: 3.4rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,.14); max-width: 650px; }
+        .hero-proof div { display: flex; flex-direction: column; gap: 3px; padding: 0 2rem; border-right: 1px solid rgba(255,255,255,.15); }
+        .hero-proof div:first-child { padding-left: 0; }
+        .hero-proof div:last-child { border: 0; }
+        .hero-proof strong { color: #fff; font-size: 1.45rem; line-height: 1.2; }
+        .hero-proof span { color: #aebdc1; font-size: .8rem; }
+        .hero-orb { position: absolute; border: 1px solid rgba(69,196,197,.19); border-radius: 50%; pointer-events: none; animation: float 9s ease-in-out infinite; }
+        .hero-orb-one { width: 340px; height: 340px; right: 8%; top: 15%; box-shadow: 0 0 0 34px rgba(69,196,197,.025), 0 0 0 68px rgba(69,196,197,.018); }
+        .hero-orb-two { width: 120px; height: 120px; right: 24%; bottom: 14%; border-color: rgba(255,255,255,.13); animation-delay: -3s; }
+        .scroll-cue { position: absolute; bottom: 1.6rem; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 10px; color: #87979c; font-size: .66rem; letter-spacing: 2px; text-decoration: none; }
+        .scroll-cue span { width: 22px; height: 30px; border: 1px solid #71878d; border-radius: 14px; position: relative; }
+        .scroll-cue span::after { content: ''; position: absolute; top: 6px; left: 9px; width: 2px; height: 6px; background: var(--accent); border-radius: 2px; animation: scrollDot 1.6s infinite; }
+        #sobre-mi, #servicios { background: #fff; }
+        #proyectos { background: #f0f4f5; }
+        .foto-perfil { border: 5px solid #fff; outline: 1px solid #dce5e6; box-shadow: 0 14px 40px rgba(22,39,44,.14); }
+        .herramientas span { background: #f5f8f8; border-color: #e0e9e9; }
+        .herramientas span:hover { background: var(--accent-deep); border-color: var(--accent-deep); }
+        .proyecto { border: 1px solid #e5ebec; border-left: 4px solid var(--accent-deep); border-radius: 14px; box-shadow: 0 5px 22px rgba(25,44,50,.035); }
+        .proyecto:hover { border-left-color: var(--accent); box-shadow: 0 16px 38px rgba(25,44,50,.09); }
+        .proyecto h3, .servicio h3 { letter-spacing: -.3px; }
+        .mini-icon, .servicio-icon { background: #f1fafa; border-color: #cde5e5 !important; }
+        .mini-icon svg, .servicio-icon svg { stroke: var(--accent-deep) !important; }
+        .servicio { border: 1px solid #e7eeee; border-top: 3px solid var(--accent-deep); border-radius: 14px; background: #f8fafa; }
+        .servicio:hover { border-top-color: var(--accent); }
+        .certificate-preview { position: relative; width: min(100%, 420px); }
+        .certificate-preview img { display: block; width: 100%; }
+        .privacy-mask { position: absolute; left: 44.5%; top: 32.6%; width: 22%; height: 2.3%; background: #fff; border-radius: 2px; }
+        .privacy-note { display: block; margin-top: .5rem; color: #6c777b; font-size: .78rem; }
+        #contacto { background: radial-gradient(ellipse at 50% 0%, rgba(69,196,197,.13), transparent 48%), linear-gradient(145deg,#111518,#20282d); }
+        #contacto .section-title h2::after { background: var(--accent); }
+        .btn-email { background: var(--accent); border-color: var(--accent); }
+        .btn-email:hover { color: #fff; border-color: var(--accent); }
+        .btn-whatsapp { border-color: #718286; }
+        .btn-whatsapp:hover { background: #fff; }
+        footer { background: #0d1113; color: #8d9b9f; }
+        .skip-link { position: absolute; top: -60px; left: 12px; z-index: 1000; padding: 10px 14px; background: #fff; color: #111; border-radius: 6px; }
+        .skip-link:focus { top: 12px; }
+        @keyframes float { 0%,100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-16px) rotate(5deg); } }
+        @keyframes scrollDot { 0% { opacity: 0; transform: translateY(0); } 35% { opacity: 1; } 100% { opacity: 0; transform: translateY(9px); } }
+        .reveal { opacity: 0; transform: translateY(22px); transition: opacity .65s ease, transform .65s ease; }
+        .reveal.is-visible { opacity: 1; transform: translateY(0); }
+        @media (max-width: 700px) {
+            #home { text-align: left; min-height: 700px; padding: 5.8rem 1.35rem 5rem; }
+            #home h1 { font-size: clamp(2.5rem, 11vw, 3.6rem); letter-spacing: -1.7px; }
+            #home .titulo { line-height: 1.6; }
+            .hero-proof { margin-top: 2.4rem; }
+            .hero-proof div { padding: 0 .85rem; flex: 1; min-width: 0; }
+            .hero-proof div:first-child { padding-left: 0; }
+            .hero-proof strong { font-size: 1.15rem; }
+            .hero-proof span { font-size: .7rem; }
+            .hero-orb-one { width: 190px; height: 190px; right: -65px; top: 11%; }
+            .hero-orb-two { width: 75px; height: 75px; right: 10%; bottom: 20%; }
+            .scroll-cue { display: none; }
+            .hero-actions .btn { justify-content: center; }
+        }
+        /* Animaciones extra: progreso, brillo, elevación y sección de CV */
+        .scroll-progress { position: fixed; top: 0; left: 0; width: 100%; height: 3px; z-index: 1001; background: transparent; pointer-events: none; }
+        .scroll-progress span { display: block; width: 0; height: 100%; background: linear-gradient(90deg, var(--accent-deep), var(--accent), #b5ffff); box-shadow: 0 0 12px rgba(69,196,197,.5); }
+        nav { transition: padding .25s ease, box-shadow .25s ease; }
+        nav.scrolled { padding-top: .72rem; padding-bottom: .72rem; box-shadow: 0 8px 28px rgba(0,0,0,.22); }
+        .btn, .btn-contacto { position: relative; overflow: hidden; isolation: isolate; }
+        .btn::after, .btn-contacto::after { content: ''; position: absolute; inset: -20% auto -20% -45%; width: 28%; transform: skewX(-22deg); background: rgba(255,255,255,.3); transition: left .55s ease; z-index: -1; }
+        .btn:hover::after, .btn-contacto:hover::after { left: 125%; }
+        .proyecto, .servicio, .cv-card { transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease; }
+        .proyecto:hover, .servicio:hover { transform: translateY(-7px); }
+        .cv-section { max-width: 100%; padding: 4.5rem 2rem; background: linear-gradient(135deg,#eaf4f5,#f7fafb 55%,#e7f3f4); }
+        .cv-card { max-width: 920px; margin: 0 auto; padding: clamp(2rem,5vw,3.4rem); border-radius: 24px; text-align: center; background: rgba(255,255,255,.84); border: 1px solid rgba(36,107,115,.17); box-shadow: 0 18px 55px rgba(25,65,70,.09); position: relative; overflow: hidden; }
+        .cv-card::before { content: ''; position: absolute; width: 240px; height: 240px; right: -110px; top: -130px; border-radius: 50%; background: rgba(69,196,197,.12); animation: float 8s ease-in-out infinite; pointer-events: none; }
+        .cv-icon { display: grid; place-items: center; width: 64px; height: 64px; margin: 0 auto 1.1rem; border-radius: 18px; color: var(--accent-deep); background: #e8f7f7; border: 1px solid #cce9e9; animation: float 4.5s ease-in-out infinite; }
+        .cv-icon svg { width: 30px; height: 30px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+        .cv-kicker { color: var(--accent-deep); font-size: .72rem; font-weight: 800; letter-spacing: 2.5px; margin-bottom: .55rem; }
+        .cv-card h2 { font-family: 'Manrope',sans-serif; font-size: clamp(1.8rem,4vw,2.65rem); line-height: 1.15; letter-spacing: -1px; color: #17191c; margin-bottom: .9rem; }
+        .cv-description { max-width: 620px; margin: 0 auto 1.5rem; color: #59666b; }
+        .cv-download { cursor: pointer; opacity: 1; }
+        .cv-note { margin-top: .9rem; font-size: .8rem; color: #788589; }
+        .back-to-top { position: fixed; right: 22px; bottom: 22px; z-index: 90; width: 46px; height: 46px; border: 1px solid rgba(255,255,255,.18); border-radius: 50%; background: #172326; color: #fff; font-size: 1.5rem; box-shadow: 0 8px 24px rgba(0,0,0,.2); cursor: pointer; opacity: 0; visibility: hidden; transform: translateY(12px); transition: opacity .25s ease, transform .25s ease, visibility .25s ease, background .25s ease; }
+        .back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+        .back-to-top:hover { background: var(--accent-deep); transform: translateY(-3px); }
+        @media (max-width: 700px) { .cv-section { padding: 3rem 1.2rem; } .cv-card { border-radius: 18px; } .back-to-top { right: 14px; bottom: 14px; } }
+        @media (prefers-reduced-motion: reduce) { .cv-icon, .cv-card::before { animation: none !important; } }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+            .reveal { opacity: 1; transform: none; }
+        }
+
+
+        /* Modo extra: microinteracciones, brillo ambiental y tarjetas con profundidad */
+        #home { isolation: isolate; }
+        #home::before { content:""; position:absolute; inset:-30%; z-index:-1; pointer-events:none; background: conic-gradient(from 180deg at 50% 50%, transparent 0deg, rgba(69,196,197,.07) 70deg, transparent 140deg, rgba(115,175,255,.06) 230deg, transparent 310deg); animation: auroraDrift 22s linear infinite; }
+        #home::after { content:""; position:absolute; inset:0; z-index:0; pointer-events:none; opacity:.14; background-image: radial-gradient(rgba(255,255,255,.5) .7px, transparent .7px); background-size: 24px 24px; mask-image: linear-gradient(90deg, transparent, #000 60%, transparent); }
+        .hero-content { transform-style:preserve-3d; }
+        .hero-orb-one { animation: float 9s ease-in-out infinite, orbPulse 7s ease-in-out infinite; }
+        .hero-orb-two { animation: float 6s ease-in-out infinite reverse, orbPulse 5s ease-in-out infinite; }
+        #home h1 span { background:linear-gradient(100deg,#45c4c5 0%,#b7ffff 35%,#45c4c5 60%,#9ac7ff 85%,#45c4c5 100%); background-size:220% auto; color:transparent; -webkit-background-clip:text; background-clip:text; animation:gradientShine 8s linear infinite; }
+        .eyebrow-dot { animation: dotPing 2.4s ease-out infinite; }
+        .section-title .icon-box { transition: transform .35s cubic-bezier(.2,.8,.2,1), background .35s ease, box-shadow .35s ease; }
+        .section-title:hover .icon-box { transform: rotate(-7deg) translateY(-3px); background:#e5f8f8; box-shadow:0 8px 22px rgba(36,107,115,.12); }
+        .proyecto, .servicio, .cv-card { transform-style:preserve-3d; will-change:transform; }
+        .proyecto::after, .servicio::after { content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none; opacity:0; background:linear-gradient(115deg,transparent 20%,rgba(69,196,197,.09) 48%,transparent 70%); background-size:220% 100%; transition:opacity .3s ease; }
+        .proyecto, .servicio { position:relative; overflow:hidden; }
+        .proyecto:hover::after, .servicio:hover::after { opacity:1; animation:cardGleam 1.1s ease both; }
+        .herramientas span { transition: transform .22s ease, color .22s ease, background .22s ease, box-shadow .22s ease; }
+        .herramientas span:hover { box-shadow:0 5px 14px rgba(36,107,115,.16); }
+        .cv-card { box-shadow:0 18px 55px rgba(25,65,70,.09); }
+        .cv-card:hover { transform:translateY(-5px); box-shadow:0 25px 70px rgba(25,65,70,.15); }
+        .cv-download { animation:cvBreathe 3.2s ease-in-out infinite; }
+        .back-to-top { backdrop-filter:blur(12px); }
+        .pointer-glow { position:fixed; left:0; top:0; width:260px; height:260px; border-radius:50%; pointer-events:none; z-index:1; opacity:0; transform:translate(-50%,-50%); background:radial-gradient(circle,rgba(69,196,197,.075),transparent 68%); transition:opacity .3s ease; }
+        @keyframes auroraDrift { to { transform:rotate(360deg); } }
+        @keyframes orbPulse { 0%,100% { opacity:.55; } 50% { opacity:1; } }
+        @keyframes gradientShine { to { background-position:220% center; } }
+        @keyframes dotPing { 0% { box-shadow:0 0 0 0 rgba(69,196,197,.42); } 70%,100% { box-shadow:0 0 0 9px rgba(69,196,197,0); } }
+        @keyframes cardGleam { from { background-position:120% 0; } to { background-position:-120% 0; } }
+        @keyframes cvBreathe { 0%,100% { box-shadow:0 0 0 0 rgba(69,196,197,0); } 50% { box-shadow:0 0 0 7px rgba(69,196,197,.09); } }
+        @media (pointer:fine) and (prefers-reduced-motion:no-preference) { .pointer-glow { opacity:1; } }
+        @media (max-width:700px) { #home::after { background-size:30px 30px; } }
+        @media (prefers-reduced-motion:reduce) { #home::before, #home h1 span, .hero-orb-one, .hero-orb-two, .eyebrow-dot, .cv-download { animation:none !important; } .pointer-glow { display:none !important; } }
+
+    </style>
+</head>
+<body>
+    <a class="skip-link" href="#home">Saltar al contenido</a>
+    <div class="scroll-progress" aria-hidden="true"><span id="scroll-progress-bar"></span></div>
+    <div class="pointer-glow" id="pointer-glow" aria-hidden="true"></div>
+
+    <div class="side-decor left"></div>
+    <div class="side-decor right"></div>
+
+    <nav>
+        <a href="#home" class="logo">Fernando Cruz</a>
+        <ul>
+            <li><a href="#home">Inicio</a></li>
+            <li><a href="#sobre-mi">Sobre Mí</a></li>
+            <li><a href="#proyectos">Proyectos</a></li>
+            <li><a href="#servicios">Habilidades</a></li>
+            <li><a href="#cv">Mi CV</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <!-- HOME -->
+    <section id="home">
+        <div class="hero-orb hero-orb-one" aria-hidden="true"></div>
+        <div class="hero-orb hero-orb-two" aria-hidden="true"></div>
+        <div class="hero-content">
+            <p class="eyebrow"><span class="eyebrow-dot"></span> PORTFOLIO PERSONAL · 2026</p>
+            <h1>Fernando Carlos<br><span>Cruz Alvarado</span></h1>
+            <p class="titulo">Estudiante de Bachillerato <span class="hero-separator">/</span> Atención al Cliente y Gestión</p>
+            <p class="propuesta">
+                Soy una persona responsable y organizada, con experiencia en atención al cliente,
+                seguimiento de pagos y gestión de información. Busco oportunidades para seguir
+                aprendiendo y aportar valor a un equipo de trabajo.
+            </p>
+            <div class="hero-actions">
+                <a href="#proyectos" class="btn">Explorar mi experiencia <span aria-hidden="true">↗</span></a>
+                <a href="#contacto" class="btn btn-ghost">Hablemos</a>
+            </div>
+            <div class="hero-proof" aria-label="Resumen de formación y experiencia">
+                <div><strong>18 h</strong><span>de formación JA</span></div>
+                <div><strong>3</strong><span>proyectos y experiencias</span></div>
+                <div><strong>2026</strong><span>portfolio actualizado</span></div>
+            </div>
+        </div>
+        <a class="scroll-cue" href="#sobre-mi" aria-label="Desplazarse a la sección Sobre mí"><span></span> CONOCÉ MÁS</a>
+    </section>
+
+    <!-- SOBRE MÍ -->
+    <section id="sobre-mi">
+        <div class="section-title">
+            <div class="icon-box">
+                <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+            <h2>Sobre Mí</h2>
+        </div>
+        <div class="sobre-contenido">
+            <img src="foto-fernando.jpg" alt="Fernando Carlos Cruz Alvarado" class="foto-perfil">
+            <div class="sobre-texto">
+                <p>
+                    Soy una persona responsable, organizada y con buenas habilidades de comunicación. 
+                    Cuento con experiencia en atención al cliente, control y seguimiento de pagos y 
+                    gestión de información. Me adapto fácilmente al trabajo presencial y virtual, 
+                    manejo herramientas digitales y mantengo un trato cordial y profesional.
+                </p>
+                <p>
+                    Me destaco por mi compromiso, puntualidad y capacidad para trabajar de forma 
+                    autónoma y en equipo. Actualmente curso el último año de secundaria en el 
+                    Instituto Cristo Obrero y participo activamente en programas de formación 
+                    práctica como ACAPS y Junior Achievement.
+                </p>
+                <div class="herramientas">
+                    <strong>Herramientas y competencias:</strong>
+                    <span>Atención al Cliente</span>
+                    <span>Gestión de Pagos</span>
+                    <span>Microsoft Excel</span>
+                    <span>Uso básico de IA</span>
+                    <span>Herramientas Digitales</span>
+                    <span>Trabajo en Equipo</span>
+                    <span>Comunicación</span>
+                    <span>Inglés (Medio)</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROYECTOS -->
+    <section id="proyectos">
+        <div class="section-title">
+            <div class="icon-box">
+                <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            </div>
+            <h2>Proyectos y Experiencia</h2>
+        </div>
+
+        <div class="proyecto">
+            <div class="proyecto-header">
+                <div class="mini-icon">
+                    <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </div>
+                <h3>1. Atención al Cliente – Jumataki F.C.</h3>
+            </div>
+            <p><strong>Período:</strong> Marzo – Noviembre 2024</p>
+            <p><strong>El desafío:</strong> Brindar atención y orientación clara a alumnos y padres, 
+            resolviendo consultas de forma presencial y telefónica, además de controlar el estado 
+            de las cuotas mensuales.</p>
+            <p><strong>Mi rol:</strong> Atención al cliente, control de pagos, registro de información 
+            y seguimiento de deudas.</p>
+            <p><strong>El proceso:</strong> Realicé el control mensual de las cuotas, verifiqué pagos 
+            realizados y pendientes, actualicé el estado de cada alumno en planillas y comuniqué 
+            deudas o pagos atrasados para lograr la regularización de las mensualidades.</p>
+            <p><strong>El resultado:</strong> Mantuve un trato cordial y profesional, logré un 
+            seguimiento ordenado de los pagos y resolví consultas de manera eficiente, 
+            fortaleciendo la comunicación con las familias.</p>
+        </div>
+
+        <div class="proyecto">
+            <div class="proyecto-header">
+                <div class="mini-icon">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                </div>
+                <h3>2. Taller de Educación Financiera – Junior Achievement Argentina</h3>
+            </div>
+            <p><strong>Año:</strong> 2025 | Programa ACAPS</p>
+            <p><strong>El desafío:</strong> Aprender herramientas de educación financiera y 
+            empleabilidad para aplicarlas en la vida personal y profesional.</p>
+            <p><strong>Mi rol:</strong> Participante activo en el trayecto de formación para la 
+            empleabilidad y el aprendizaje.</p>
+            <p><strong>El proceso:</strong> Completé 13 horas de contenidos de Educación Financiera 
+            y 5 horas de Habilidades para la Empleabilidad, en modalidad 100% online, desarrollado 
+            por Junior Achievement Argentina.</p>
+            <p><strong>El resultado:</strong> Adquirí conocimientos prácticos sobre finanzas 
+            personales, presupuesto, ahorro y herramientas que mejoran mi perfil de empleabilidad. 
+            Obtuve la constancia oficial de participación.</p>
+
+            <div class="certificado-box">
+                <p>Constancia de participación – Junior Achievement Argentina</p>
+                <div class="certificate-preview">
+                    <img src="certificado-junior-1.png" alt="Constancia de participación de Junior Achievement Argentina; el DNI está oculto por privacidad">
+                    <span class="privacy-mask" aria-label="DNI oculto por privacidad"></span>
+                </div>
+                <small class="privacy-note">Vista pública: DNI oculto por privacidad.</small>
+            </div>
+        </div>
+
+        <div class="proyecto">
+            <div class="proyecto-header">
+                <div class="mini-icon">
+                    <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                </div>
+                <h3>3. Prácticas Inmersivas ACAPS – Banco Ciudad, UCA, ARCA y más</h3>
+            </div>
+            <p><strong>Período:</strong> Octubre (Programa ACAPS)</p>
+            <p><strong>El desafío:</strong> Conocer de cerca el funcionamiento de instituciones 
+            clave y explorar distintas orientaciones profesionales.</p>
+            <p><strong>Mi rol:</strong> Participante de las prácticas inmersivas organizadas por ACAPS.</p>
+            <p><strong>El proceso:</strong> Visité y trabajé contenidos de:
+                Banco Ciudad (crédito, caja de ahorro, presupuesto, tarjetas), 
+                UCA (técnicas de estudio universitario, IA y empleabilidad), 
+                ARCA (DGI, DGA, Seguridad Social), 
+                UBA (CBC y modalidades de estudio), 
+                Teatro Colón (visita guiada, museo y obra), 
+                TUMO (tecnología) y orientaciones de Modo Carrera 
+                (videojuegos, sport analytics, industria del entretenimiento, management deportivo y emprendedurismo).
+            </p>
+            <p><strong>El resultado:</strong> Amplié mi visión sobre posibles caminos profesionales 
+            y reforcé competencias de organización, comunicación y trabajo en equipo.</p>
+        </div>
+    </section>
+
+    <!-- HABILIDADES -->
+    <section id="servicios">
+        <div class="section-title">
+            <div class="icon-box">
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <h2>Habilidades y Competencias</h2>
+        </div>
+        <div class="servicios-grid">
+            <div class="servicio">
+                <div class="servicio-icon">
+                    <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </div>
+                <h3>Atención al Cliente</h3>
+                <p>Experiencia real atendiendo alumnos y padres de forma presencial y telefónica, resolviendo consultas con claridad y buena predisposición.</p>
+            </div>
+            <div class="servicio">
+                <div class="servicio-icon">
+                    <svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                </div>
+                <h3>Control y Gestión de Pagos</h3>
+                <p>Seguimiento de cuotas, verificación de pagos realizados y pendientes, y actualización de planillas de forma ordenada y responsable.</p>
+            </div>
+            <div class="servicio">
+                <div class="servicio-icon">
+                    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+                </div>
+                <h3>Microsoft Excel</h3>
+                <p>Uso básico de Excel para tareas laborales: registro de información, control de pagos, organización de datos y seguimiento de planillas.</p>
+            </div>
+            <div class="servicio">
+                <div class="servicio-icon">
+                    <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                </div>
+                <h3>Uso básico de Inteligencia Artificial</h3>
+                <p>Manejo básico de herramientas de IA para apoyar tareas laborales, organización de información y mejora de procesos de trabajo.</p>
+            </div>
+            <div class="servicio">
+                <div class="servicio-icon">
+                    <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                </div>
+                <h3>Comunicación Efectiva</h3>
+                <p>Trato cordial y profesional. Capacidad para explicar información de manera clara tanto de forma oral como escrita.</p>
+            </div>
+            <div class="servicio">
+                <div class="servicio-icon">
+                    <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                </div>
+                <h3>Organización y Responsabilidad</h3>
+                <p>Puntualidad, compromiso y capacidad para trabajar de forma autónoma o en equipo, adaptándome a distintos entornos.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CV DESCARGABLE -->
+    <section id="cv" class="cv-section">
+        <div class="cv-card reveal">
+            <div class="cv-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="14" y2="17"/></svg>
+            </div>
+            <p class="cv-kicker">DESCARGA DIRECTA · PDF</p>
+            <h2>Mi currículum, a un clic.</h2>
+            <p class="cv-description">Conocé mi experiencia, formación y habilidades. Podés descargar mi currículum en PDF para tenerlo a mano.</p>
+            <a class="btn cv-download" href="Fernando-Cruz-CV.pdf" download="Fernando-Cruz-CV.pdf" title="Descargar currículum en PDF">
+                <span aria-hidden="true">↓</span> Descargar mi CV
+            </a>
+            <p class="cv-note">PDF actualizado · Currículum de Fernando Cruz</p>
+        </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto">
+        <div class="section-title">
+            <div class="icon-box">
+                <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <h2>Contacto</h2>
+        </div>
+        <p>¿Tenés una oportunidad, una consulta o una propuesta? Me gustaría conocerte.</p>
+
+        <div class="contacto-datos">
+            <p><strong>Email:</strong> <a href="mailto:Fernandocruz77787@gmail.com">Fernandocruz77787@gmail.com</a></p>
+            <p><strong>Teléfono:</strong> <a href="tel:+541136092149">11 3609 2149</a></p>
+            <p><strong>Ubicación:</strong> Villa Soldati – Buenos Aires</p>
+        </div>
+
+        <div class="botones-contacto">
+            <a href="mailto:Fernandocruz77787@gmail.com" class="btn-contacto btn-email">Enviar Email</a>
+            <a href="https://wa.me/541136092149" target="_blank" class="btn-contacto btn-whatsapp">WhatsApp</a>
+        </div>
+    </section>
+
+    <button class="back-to-top" id="back-to-top" type="button" aria-label="Volver arriba" title="Volver arriba">↑</button>
+
+    <footer>
+        <p>© 2026 Fernando Carlos Cruz Alvarado — Portfolio personal</p>
+    </footer>
+
+    <script>
+        // Animaciones de entrada al desplazarse, con alternativa sin JavaScript.
+        document.documentElement.classList.add('js-enabled');
+        const revealTargets = document.querySelectorAll('.section-title, .sobre-contenido, .proyecto, .servicio, .cv-card');
+        if ('IntersectionObserver' in window) {
+            revealTargets.forEach((element) => element.classList.add('reveal'));
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.12 });
+            revealTargets.forEach((element, index) => {
+                element.style.transitionDelay = `${Math.min(index % 4, 3) * 75}ms`;
+                revealObserver.observe(element);
+            });
+        }
+
+        // Barra de progreso de lectura, navegación compacta y botón para volver arriba.
+        const progressBar = document.getElementById('scroll-progress-bar');
+        const topButton = document.getElementById('back-to-top');
+        const navBar = document.querySelector('nav');
+        const updateScrollUI = () => {
+            const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0;
+            progressBar.style.width = `${progress}%`;
+            navBar.classList.toggle('scrolled', window.scrollY > 24);
+            topButton.classList.toggle('visible', window.scrollY > 420);
+        };
+        window.addEventListener('scroll', updateScrollUI, { passive: true });
+        updateScrollUI();
+        topButton.addEventListener('click', () => window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }));
+
+        // Brillo ambiental que sigue suavemente el cursor en pantallas con mouse.
+        const glow = document.getElementById('pointer-glow');
+        if (glow && window.matchMedia('(pointer:fine) and (prefers-reduced-motion:no-preference)').matches) {
+            window.addEventListener('pointermove', (event) => {
+                glow.style.left = `${event.clientX}px`;
+                glow.style.top = `${event.clientY}px`;
+            }, { passive: true });
+        }
+
+        // Inclinación muy sutil en tarjetas, solo con mouse; no afecta pantallas táctiles.
+        if (window.matchMedia('(pointer:fine) and (prefers-reduced-motion:no-preference)').matches) {
+            document.querySelectorAll('.proyecto, .servicio').forEach((card) => {
+                card.addEventListener('pointermove', (event) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = (event.clientX - rect.left) / rect.width;
+                    const y = (event.clientY - rect.top) / rect.height;
+                    card.style.transform = `perspective(900px) rotateX(${(0.5-y)*2.2}deg) rotateY(${(x-0.5)*2.2}deg) translateY(-4px)`;
+                });
+                card.addEventListener('pointerleave', () => { card.style.transform = ''; });
+            });
+        }
+    </script>
+</body>
+</html>
